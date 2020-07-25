@@ -1,0 +1,262 @@
+{% block head %}
+	<title>Diabetic Prediction</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" >
+	<!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>-->
+	<link href="{{ url_for('static', filename='css/jquery-ui.css') }}"  rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/all.css') }}"  rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/css.css') }}"  rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/theme-default.min.css') }}" rel="stylesheet" type="text/css" />
+	
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+{% block body %}
+	<div id="loading"><div class="loader"></div></div>
+	<canvas id="anpr-canvas"></canvas>
+	
+	<div class="main">
+		
+		<!-- Navigation -->
+		<nav class="main-nav navbar navbar-expand-lg bg-lignt fixed-top">
+		
+			<div class="color-line color-secondary-darker">
+                <div class="color-primary-light"></div>
+                <div class="color-primary"></div>
+                <div class="color-blue-dark"></div>
+            </div>		
+		
+			<div class="container">
+				<a class="logo" href="#"><img src=".{{ url_for('static', filename='img/logo.png') }}" alt=""></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="main-nav-links navbar-nav ml-auto">					
+						<li class="nav-item active dropdown">
+							<a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Diabetes</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" href="https://www.webmd.com/diabetes/guide/types-of-diabetes-mellitus">Types of Diabetics</a>
+								<a class="dropdown-item" href="https://www.who.int/diabetes/country-profiles/sau_en.pdf">Saudi Arabia</a>
+
+							</div>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="https://www.munnamotorgarage.com/fcitrabet/saudi_diabetise_survey_2019-2020-En.php">Survey</a></li>
+						<li class="nav-item"><a class="nav-link" href="https://www.diabetes.org.uk/preventing-type-2-diabetes/can-diabetes-be-prevented">Precaution</a></li>
+
+						<li class="nav-item active dropdown">
+							<a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About us</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" href="https://shassan1.kau.edu.sa/Default-0060908-EN">Dr. Asif Hassan syed</a>
+								<a class="dropdown-item" href="https://www.kau.edu.sa/Default-0057865-EN">Mr.Tabrej Khan</a>
+
+
+							</div>
+						</li>
+
+
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- Navigation -->
+		
+		
+		
+		<br/><br/>
+
+		
+		<div class="app">
+			<div class="container pb-5">
+			    <h4 class="text-center title">Predicting the Risk of Type 2 Diabetes Mellitus (T2DM) in the Western Region of Saudi Arabia.</h4>
+				<div class="app-box">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs anpr-tabs" role="tablist">
+						<li class="nav-item" id="manual-tab">
+							<a class="nav-link active" data-toggle="tab" href="#manual">About Diabetic</a>
+						</li>
+						<li class="nav-item" id="automatic-tab">
+							<a class="nav-link" data-toggle="tab" href="#automatic">Diabetic Prediction</a>
+						</li>
+						
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						
+						<div id="manual" class="container tab-pane active"><br>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="manual-video-box">
+									   <img src="{{ url_for('static', filename='img/type-2-diabetes-49a3ee.jpg') }}" alt="">
+										
+										
+										<div id="manual-image"></div>
+																											
+									</div>
+								</div>
+								<div class="col-md-8 no-padding">
+									<div class="manual-table-box">										
+										<table class="manual-table styled-table table table-bordered table-fixed">
+											<thead class="manual-table-head">
+												<tr>
+													
+												</tr>
+											</thead>
+											<tbody class="manual-table-body">
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div id="automatic" class="container tab-pane fade"><br>
+							<div class="row">
+								
+								<div class="col-md-8 no-padding">
+									<div class="automatic-table-box">
+										<div class="my-3 text-center">
+											<div class="alert registration-success-message alert-success" role="alert">
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<strong>Congratulations!</strong>  You have been registered successfully!
+											</div>
+											<form action="/diabetes" method="POST">
+											<div class="form-group">
+													<select id="region" name="region" class="browser-default custom-select" required="required">
+														<option value="" selected>Choose Region</option>
+														<option value="1">Abwa</option>
+														<option value="2">Jeddah</option>
+														<option value="3">Khulays</option>
+														<option value="4">Medina</option>
+														<option value="5">Masturah</option>
+														<option value="6">Mecca</option>
+														<option value="7">Rabigh</option>
+														<option value="8">Sabar</option>
+														<option value="9">Thual</option>
+														<option value="10">Yambu</option>
+														
+													</select>
+																																							
+												</div>
+												<div class="form-group">
+													<select id="gender" name="gender" class="browser-default custom-select" required="required">
+														<option value="" selected>Choose Gender</option>
+														<option value="1">Male</option>
+														<option value="0">Female</option>
+														
+														
+													</select>
+																																							
+												</div>
+												<div class="form-group">
+													<select id="bmi" name="bmi" class="browser-default custom-select" required="required">
+														<option value="" selected>Choose Body Mass Index(BMI)</option>
+														<option value="0">Lower than 25 kg/m2</option>
+														<option value="1">25 – 30 kg/m2</option>
+														<option value="2">25 – 30 kg/m2</option>
+														
+													</select>
+																																							
+												</div>
+												<div class="form-group">
+													<select id="diet" name="diet" class="browser-default custom-select" required="required">
+														<option value="" selected>How regular do you eat fruits and vegetable?</option>
+														<option value="0">Every day</option>
+														<option value="1">Not Every day</option>
+														
+														
+													</select>
+																																							
+												</div>
+												<div class="form-group">
+													<select id="bp" name="bp" class="browser-default custom-select" required="required">
+														<option value="" selected>Have you ever taken hypertension medicine?</option>
+														<option value="0">No</option>
+														<option value="1">Yes</option>
+														
+														
+													</select>
+																																							
+												</div>
+												<div class="form-group">
+													<select id="smoking" name="smoking" class="browser-default custom-select" required="required">
+														<option value="" selected>Smoking habits?</option>
+														<option value="0">No</option>
+														<option value="1">Yes</option>
+														
+														
+													</select>
+																																							
+												</div>
+												<input type="submit" value="Predict">
+												
+											</form>	
+										</div>
+									</div>	
+								</div>
+							</div>						
+						</div>
+						
+						<div id="reports" class="container tab-pane fade">
+
+							
+							<!-- Tab panes -->
+							<div class="tab-content"><br/>
+								
+								
+								
+								
+								
+								
+							</div>
+							<br/><br/>
+												
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+		<!-- copyright -->
+		<section id="copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-md-6">
+						<p class="text-md-left text-center">© 2019-2020 Copyright <a href="#">Dr. Asif Hassan Syed and Mr. Tabrej Khan</a></p>
+					</div>
+					<div class="col-xs-12 col-md-6 ml-auto">
+						<div class="social-links text-md-right text-center">
+							<a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+							<a href="#" class="facebook"><i class="fab fa-facebook"></i></a>
+							<a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+							<a href="https://www.youtube.com/channel/UC8FrivtUBuk_oOlqV5hkmXg" class="youtube"><i class="fab fa-youtube"></i></a>
+							<a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- copyright -->
+		
+		<a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
+		
+
+
+    </div>
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='jquery.form-validator.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.nicescroll.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery-ui.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/intlTelInput.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
